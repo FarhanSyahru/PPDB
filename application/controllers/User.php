@@ -63,4 +63,36 @@ class User extends CI_Controller
 			redirect('user');
         }
     }
+    public function ppdb()
+    {
+        $data['title'] = 'PPDB';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('umur', 'Umur', 'required|trim');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
+        $this->form_validation->set_rules('asal_sekolah', 'Asal_sekolah', 'required|trim');
+        $this->form_validation->set_rules('sekolah_tujuan', 'Sekolah_tujuan', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+			$this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/ppdb', $data);
+            $this->load->view('templates/footer');
+		}else{
+        $data = [
+            'nama' => $this->input->post('nama', true),
+            'umur' => $this->input->post('umur', true),
+            'alamat' => $this->input->post('alamat', true),
+            'asal_sekolah' => $this->input->post('asal_sekolah', true),
+            'sekolah_tujuan' => $this->input->post('sekolah_tujuan', true),
+        ];
+
+        $this->db->insert('ppdb', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Mendaftar!</div>');
+		redirect('user/ppdb');
+    }
+
+    }
 }

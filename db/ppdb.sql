@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2023 at 06:28 AM
+-- Generation Time: Jun 16, 2023 at 01:48 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `ppdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ppdb`
+--
+
+CREATE TABLE `ppdb` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(256) NOT NULL,
+  `umur` int(11) NOT NULL,
+  `alamat` varchar(256) NOT NULL,
+  `asal_sekolah` varchar(256) NOT NULL,
+  `sekolah_tujuan` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ppdb`
+--
+
+INSERT INTO `ppdb` (`id`, `nama`, `umur`, `alamat`, `asal_sekolah`, `sekolah_tujuan`) VALUES
+(1, 'Alif', 15, 'Tegal', 'smp tegal', 'sma tegal');
 
 -- --------------------------------------------------------
 
@@ -44,7 +66,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_create`) VALUES
 (6, 'Fahmi Arifiansyah', 'fahmihero02@gmail.com', 'default.jpg', '$2y$10$jfmMpUV9YxcCa.3jl9gBe.wqdg459fDnHsuuYMYDTvHKLLaqyCCle', 1, 1, 1677689629),
-(8, 'Fikri Oka', 'okafadilah14@gmail.com', 'facebook_1678555265427_7040371064001563269.jpg', '$2y$10$/pLWBMM5BZa764bixB1jXupzaBvE5Qs.NrSWSK4wqDSlzCDnMszRG', 1, 1, 1679642304);
+(8, 'Fikri Oka', 'okafadilah14@gmail.com', 'kururin-kuru-kuru.gif', '$2y$10$/pLWBMM5BZa764bixB1jXupzaBvE5Qs.NrSWSK4wqDSlzCDnMszRG', 1, 1, 1679642304),
+(9, 'Alif', 'alifahmad@gmail.com', '2222.png', '$2y$10$Ef4YRM53d/jVkBEmjGMjteQVbl8Ga/ybHo.FcKbKOWXT86LfJ40vK', 2, 1, 1679723298);
 
 -- --------------------------------------------------------
 
@@ -65,7 +88,8 @@ CREATE TABLE `user_access_menu` (
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 1, 3);
+(3, 1, 3),
+(4, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -146,11 +170,18 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
 (4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
 (5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
-(6, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1);
+(6, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
+(7, 2, 'PPDB', 'user/ppdb', 'fas fa-fw fa-sign', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `ppdb`
+--
+ALTER TABLE `ppdb`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -193,16 +224,22 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
+-- AUTO_INCREMENT for table `ppdb`
+--
+ALTER TABLE `ppdb`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_login`
@@ -226,7 +263,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
